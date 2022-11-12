@@ -1,0 +1,66 @@
+<nav class="row container-fluid navbar navbar-expand-lg  bg-Cgraylight py-0 ">
+  <div class="text-white ml-2 ml-md-5 col-7 col-md-2">
+    <a class="ml-md-5" href="">
+      <img src="{% static 'images/logo_sapo.png' %}"  class="h-50 w-50">
+    </a>
+  </div>
+  <button class="navbar-toggler mr-5" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse mt-3 mt-md-0 small col-md-8" id="navbarSupportedContent">
+    <ul class="navbar-nav text-md-center  text-left flex-grow-1 d-flex justify-content-md-center">
+      <li class="nav-item text-center mx-2 nav-item dropdown">
+        <div class="nav-link">
+          <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-users fa-2x text-Cprimary">
+              <div class="h6 m-0">
+                <h5>Perfiles</h5>
+              </div>
+            </i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          </div>
+        </div>
+      </li>
+      <li class="nav-item text-center mx-2 nav-item dropdown">
+        <div class="nav-link">
+          <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-globe fa-2x text-Cprimary">
+              <div class="h6 m-0">
+                <h5>Ubicaciones</h5>
+              </div>
+            </i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item " href="{% url 'locations:readCountry'%}">Paises</a>
+            <a class="dropdown-item " href="{% url 'locations:readDepartament'%}">Departamentos</a>
+            <a class="dropdown-item " href="{% url 'locations:readCity'%}">Ciudades</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="justify-content-md-end justify-content-center">
+      <ul class="navbar-nav text-right flex-grow-1 my-0 d-flex justify-content-end">
+        <li class="nav-item text-center mx-2 nav-item dropdown">
+          <div class="row">
+            <div class="nav-link col-12 col-md-3 mt-md-2">
+              <a class="dropdown-toggle text-Cprimary " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-user-circle-o fa-2x text-Cprimary">
+                  <div class="h6 m-0">
+                    <h6 >{{user.get_full_name}}</h6>
+                    <h6 >({{user.groups.all.0.name}})</h6>
+                  </div>
+                </i>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">        
+                <a class="dropdown-item " href="{% url 'profiles:logout' %}">Cerrar sesión<i class=" ml-2 fa fa-sign-in text-Cprimary " aria-hidden="true"></i></a>
+              </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

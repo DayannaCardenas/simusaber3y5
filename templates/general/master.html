@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Sapo</title>
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="{% static 'bootstrap4.6/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/css/font-awesome.css' %}"> 
+        <link rel="stylesheet" href="{% static 'general/general.css' %}?{{version_static}}">   
+        <link rel="icon" href="{% static 'images/icono_sapo.ico' %}">
+    </head>
+    <body>
+
+        <body class="d-flex flex-column min-vh-100 ">
+            <!-- <body class="d-flex flex-column min-vh-100 "> -->
+            <!-- <body>   -->
+            <header class="mx-0">
+                {% include "general/header.html" %}
+                <hr class="mb-0">
+            </header>
+            <div class="container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <!-- Modal para eliminar -->
+            <div class="modal fade right" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+                aria-hidden="true" data-backdrop="false">
+                <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+                    <div class="modal-content">
+                        <!--Header-->
+                        <div class="modal-header bg-light">
+                            <div class="col-12 text-dark text-start font-weight-bold h5 my-2">
+                                ¡Espera!
+                            </div>
+                        </div>
+                        <div class="modal-body ml-3">
+                            ¿Estás seguro de eliminar este elemento?
+                        </div>
+                        <div class="modal-footer">
+                            <a type="button"
+                                class="col-3 mt-2 btn btn-sm bg-Cprimary btn-block text-white waves-effect waves-light"
+                                href="">Cancelar
+                                <i class="fa fa-times ml-1"></i>
+                            </a>
+                            <button type="submit" form="createform" name="action" value="delete"
+                                class="col-3 btn btn-sm bg-danger btn-block text-white waves-effect waves-light">Eliminar
+                                <i class="fa fa-check ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal: General -->
+            <div class="modal fade right {% block modalErrors %}{% endblock%}" id="GeneralModal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel {% block crudShow %}{% endblock %}" aria-hidden="true" data-backdrop="false">
+                <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
+                    <div class="modal-content">
+                        <!--Header-->
+                        <div class="modal-header bg-light">
+                            <div class="col-10 text-dark text-start font-weight-bold h5 my-2 ml-4">
+                                {% block form_modal_title %}
+                                {% endblock %}
+                            </div>
+                        </div>
+                        <!--Body-->
+                        <div class="modal-body">
+                            {%block form_modal_content %}
+        
+                            {%endblock%}
+                        </div>
+                        <!--Footer-->
+                        <div class="modal-footer">
+                            {% block form_modal_footter %}
+        
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <footer class="mt-auto">
+                {% include "general/footer.html" %}
+            </footer>
+        
+
+        <!-- Bootstrap JS -->
+        <script type="text/javascript" src="{% static 'jquery/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'jquery/jquery-ui.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'jquery/jquery.autocomplete.js' %}"></script>
+        <script type="text/javascript" src="{% static 'bootstrap4.6/js/bootstrap.bundle.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'general/general.js' %}?{{version_static}}"></script>
+        <script type="text/javascript" src="{% static 'general/config.js' %}?{{version_static}}"></script>
+        <script type="text/javascript" src="{% static 'general/apis.js' %}?{{version_static}}"></script>
+          
+        {% block script %}
+        {% endblock %}              
+    </body>
+</html>

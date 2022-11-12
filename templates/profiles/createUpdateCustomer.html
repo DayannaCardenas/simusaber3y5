@@ -1,0 +1,241 @@
+{% extends 'general/master.html' %}
+{% block script %}
+<script type="text/javascript" src="{% static 'apps/profiles/generalProfile.js' %}"></script>
+{% endblock %}
+
+
+
+{% block content %}
+<form class="container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <h1>
+            Cliente
+        </h1>
+    </div>
+    <div class="row" >
+        <div class="col-4">
+            <div class="form-group">
+                <label>Nombres</label>
+                <input type = "text" class = "form-control" name="first_name" autofocus value="{% if form1.errors and form.errors %}{{form.first_name.value}}{% else %}{{customer.user.first_name}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.first_name.errors %}
+                     {{form.first_name.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Apellidos</label>
+                <input type = "text" class = "form-control" name="last_name"  value="{% if form1.errors and form.errors %}{{form.last_name.value}}{% else %}{{customer.user.last_name}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.last_name.errors %}
+                     {{form.last_name.errors}}
+                    {%endif%}
+                </div>
+            </div> 
+        </div>
+        <div class="col-4 {% if customer %} d-none {% endif %}">
+            <div class="form-group">
+                <label>Correo</label>
+                <input type = "email" class = "form-control" name="email"  value="{% if form1.errors and form.errors %}{{form.email.value}}{% else %}{{customer.user.email}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.email.errors %}
+                     {{form.email.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row {% if customer %} d-none {% endif %}" >
+        <div class="col-6">
+            <label>Contraseña</label>
+            <div class="input-group">
+                <input type="password" name="new_password" class="form-control">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white border-left-0">
+                    <i class="fa js-eye-show text-Cprimary fa-eye-slash"></i>
+                  </span>
+                </div>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.new_password.errors %}
+                     {{form.new_password.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Repetir Contraseña</label>
+            <div class="input-group">
+                <input type="password" name="repeat_password" class="form-control">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white border-left-0">
+                    <i class="fa js-eye-show text-Cprimary fa-eye-slash"></i>
+                  </span>
+                </div>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.repeat_password.errors %}
+                     {{form.repeat_password.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-4">
+            <div class="form-group">
+                <label>Tipo de Documento</label>
+                <select class="form-control" name="type_document">
+                    <option> - - - - - - - - - - - -</option>
+                {% for type_document in type_documents %}
+                    <option value="{{type_document.id}}" {% if form.errors and form1.errors and form1.type_document.value|floatformat:'0' == type_document.id|floatformat:'0' %}selected {% elif type_document.id|floatformat:'0' == customer.type_document.id|floatformat:'0'%}selected{% endif %}>{{type_document.name}}</option>
+                {% endfor %}
+                </select>
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.type_document.errors %}
+                     {{form1.type_document.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Número de Documento</label>
+                <input type = "text" class = "form-control" name="document"  value="{% if form1.errors and form.errors %}{{form1.document.value}}{% else %}{{customer.document}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.document.errors %}
+                     {{form1.document.errors}}
+                    {%endif%}
+                </div>
+            </div> 
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Número de Celular</label>
+                <input type = "text" class = "form-control" name="cell_phone"  value="{% if form1.errors and form.errors %}{{form1.cell_phone.value}}{% else %}{{customer.cell_phone}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.cell_phone.errors %}
+                     {{form1.cell_phone.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-4">
+            <div class="form-group">
+                <label>Telefono</label>
+                <input type = "text" class = "form-control" name="phone"  value="{% if form1.errors and form.errors %}{{form1.phone.value}}{% else %}{{customer.phone}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.phone.errors %}
+                     {{form1.phone.errors}}
+                    {%endif%}
+                </div>
+            </div> 
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Dirección</label>
+                <input type = "text" class = "form-control" name="address"  value="{% if form1.errors and form.errors %}{{form1.address.value}}{% else %}{{customer.address}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.address.errors %}
+                     {{form1.address.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label>Estado</label>
+                <select class="form-control" name="is_active">
+                   <option value="True"{% if form1.errors and form.errors and form.is_active == True  %} selected  {% elif customer.is_active == True  %} selected {% endif %}>Activo</option>
+                   <option value="False" {% if form1.errors and form.errors and form.is_active == False  %} selected {% elif customer.is_active == False  %} selected {% endif %}>Inactivo</option>
+                </select>
+                <div class='row mx-0 alert-danger'>
+                    {%if form.is_active.errors %}
+                     {{form.is_active.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class='col-3'>
+            <div class="form-group">
+                <label>Pais </label>
+                <select class="form-control js-country"  >
+                    <option value="0" selected> - - - Seleccionar - - - -</option>
+                    {% for country in countries %}
+                        <option class="countryValue" value="{{country.id}}" {% if country.id|floatformat:'0' == customer.city.departament.country.id|floatformat:'0'%} selected {% endif %}>{{country.name}}</option>
+                    {% endfor %}                   
+                </select>
+            </div>
+        </div>
+        <div class='col-3'>
+            <div class="form-group">
+                <label>Departmento </label>
+                <select class="form-control js-departament" {%if not customer %}disabled{%endif%}>
+                    {%if customer %}
+                        <option value="{{customer.office.city.departament.id}}">{{customer.office.city.departament.name}}</option>
+                    {%endif%}
+                </select>
+            </div>
+        </div>
+        <div class='col-3'>
+            <div class="form-group">
+                <label>Ciudad </label>
+                <select class="form-control js-city"   {%if not customer %}disabled{%endif%}>
+                    {%if customer %}
+                        <option value="{{customer.office.city.id}}">{{customer.office.city.name}}</option>
+                    {%endif%}
+                </select>
+            </div>
+        </div>
+        <div class='col-3'>
+            <div class="form-group">
+                <label>Sede</label>
+                <select class="form-control {%if form2.errors or form.errors %}erroroffice{%endif%} js-office"  name="office" {%if form1.errors or form.errors %}data-office="{{form1.office.value}}"{%endif%}  {%if not customer %}disabled{%endif%}>
+                    {%if customer %}
+                        <option value="{{customer.office.id}}">{{customer.office.name}}</option>
+                    {%endif%}
+                </select>
+            </div>
+            <div class='row mx-0 alert-danger'>
+                {%if form1.office.errors %}               
+                    {{form1.office.errors}}
+                {%endif%}
+            </div>
+        </div>
+    </div> 
+    <div class="row" >
+        <div class="col-6">
+            <div class="form-group">
+                <label>URL</label>
+                <input type = "text" class = "form-control" name="url"  value="{% if form1.errors and form.errors %}{{form1.url.value}}{% else %}{{customer.url}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form1.url.errors %}
+                     {{form1.url.errors}}
+                    {%endif%}
+                </div>
+            </div> 
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label>Imagen  (Tamaño maximo: 400x400px)</label>
+                <input type="file" accept="image/*" name='image' class="form-control-file">
+                <div>
+                    {%if client.image %}
+                        <img src="{{client.image.url}}" width="100px" height="100px" class="img-fluid">                
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <button type="submit" class="btn bg-Csecondary">Guardar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

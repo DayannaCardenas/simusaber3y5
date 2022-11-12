@@ -1,0 +1,56 @@
+{% extends 'general/master.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row mx-0 mt-4 mb-2">
+        <div class="col-6 col-md-0 px-0">
+            <h2><b>Clientes</b></h2>
+        </div>
+    </div>
+    <div class="row mx-0">
+        <div class="col-12 p-0">
+          <div class="table-responsive">
+            <div class="table-wrapper">
+              <div class="row mx-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="bg-Cprimary text-justify text-light shadow">
+                      <th class="align-middle text-center">ID</th>
+                      <th class="align-middle text-center">Imagen</th>
+                      <th class="align-middle text-center">Nombres</th>     
+                      <th class="align-middle text-center">Apellidos</th>     
+                      <th class="align-middle text-center">Sede</th>     
+                      <th class="align-middle text-center">Tipo de Documento</th>     
+                      <th class="align-middle text-center">Documento</th>     
+                      <th class="align-middle text-center">Telefono</th>     
+                      <th class="align-middle text-center">Celular</th>     
+                      <th class="align-middle text-center">Dirección</th>     
+                      <th class="align-middle text-center">URL</th>     
+                      <th class="align-middle text-center">Estado</th>     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for customer in customers %}
+                    <tr class="table-light text-justify">
+                        <td class="align-middle text-center">{{customer.user.id}}</td>
+                        <td class="align-middle text-center">{{customer.image}}</td>
+                        <td class="align-middle text-center">{{customer.user.first_name}}</td>
+                        <td class="align-middle text-center">{{customer.user.last_name}}</td>
+                        <td class="align-middle text-center">{{customer.office.name}}</td>
+                        <td class="align-middle text-center">{{customer.type_document.name}}</td>
+                        <td class="align-middle text-center">{{customer.document}}</td>
+                        <td class="align-middle text-center">{{customer.phone}}</td>
+                        <td class="align-middle text-center">{{customer.cell_phone}}</td>
+                        <td class="align-middle text-center">{{customer.address}}</td>
+                        <td class="align-middle text-center">{{customer.url}}</td>
+                        <td class="align-middle text-center">{{customer.user.is_active}}</td>
+                    </tr>                            
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}

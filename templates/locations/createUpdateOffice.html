@@ -1,0 +1,29 @@
+{% extends 'general/master.html' %}
+{% block script %}
+{% endblock %}
+
+
+
+{% block content %}
+<form class="container" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <h1>
+            Oficina
+        </h1>
+    </div>
+    <div class="row" >
+        <div class="col-4">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type = "text" class = "form-control" name="name" autofocus value="{% if form1.errors and form.errors %}{{form.name.value}}{% else %}{{office.user.name}}{% endif %}">
+                <div class='row mx-0 alert-danger'>
+                    {%if form.name.errors %}
+                     {{form.name.errors}}
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        
+</form>
+{% endblock %}

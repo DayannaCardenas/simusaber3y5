@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Sapo</title>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="{% static 'bootstrap4.6/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'fonts/css/font-awesome.css' %}">
+  <link rel="stylesheet" href="{% static 'general/general.css' %}?{{version_static}}">  
+</head>
+
+<body class="bg-Clogin full-Cimage text-dark">   
+  <div class="container-fluid">
+    <div class="row h-100 pt-5 align-items-center">
+      <div class="col-6 offset-3 col-md-4 offset-4 card mt-5 rounded  shadow">
+          <div class="row justify-content-center">
+            <img class="img-fluid py-2" alt="Responsive image" src="{% static 'images/logo_sapo1.png' %}">            
+          </div>
+          <hr">
+          <div class="row  justify-content-center">
+            <h3 class="text-Cprimary"><b>¡Bienvenido!</b></h3>
+          </div>
+          <div class="row  justify-content-center">
+            Ingrese a su Cuenta
+          </div>
+          <hr>
+        <div class="card-body ">
+          <form action="" method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Usuario</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-envelope-open-o" aria-hidden="true"></i></span>
+                    </div>
+                    <input type="text" id="login_username" placeholder="Ingrese su Usuario" class="form-control"
+                    name="username">
+                  </div>
+                  <div class="help-block with-errors text-danger">{{form.errors.username}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Contraseña</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                      </div>
+                      <input type="password" id="login_password" placeholder="Ingrese su Contraseña" class="form-control"
+                        name="password">
+                      <div class="input-group-prepend">
+                        <span class="text-Csecondary input-group-text bg-white border-left-0">
+                          <i class="fa js-eye-show fa-eye-slash"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="help-block with-errors text-danger">{{form.errors.password}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 mb-3">
+              <div class="col-md-12">
+                <button type="submit" class="btn text-white bg-Cprimary btn-lg btn-block">
+                  Ingresar
+                </button>
+              </div>
+            </div>
+            <div class="row mt-2 mb-3 justify-content-center">
+              <a class="text-Csecondary" data-toggle="modal" data-target="#reset_password_modal" href="#">¿Olvidaste Tu Contraseña?</a>
+            </div>
+            {% for err in form.non_field_errors %}
+            <div class="row border-Cprimary text-center">              
+              <div class="col-12 pt-2">
+                <p>{{err}}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </form>        
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="reset_password_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">          
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row justify-content-center mb-2">
+            <h4 class="modal-title text-center" id="exampleModalLabel"><b>Restablecer Contraseña</b></h4>
+          </div>
+          <div role="tabpanel" class="tab-pane" name="P3">
+            <div class="row justify-content-center">
+                <div class="col-11">
+                      <div role="tabpanel">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" name="Paso1">
+                                <form class="row justify-content-center js-form_Reset">
+                                    <div class="col-11">
+                                        <div class="row pt-md-1 pb-md-1 h8 justify-content-center ">
+                                          Ingresa tu correo electrónico y te enviaremos un código de verificación para que puedas recuperar la contraseña de tu cuenta.
+                                        </div>
+                                        <div class="row pt-md-3 pb-md-3">
+                                            <input type="text" name="emailReset" class="form-control" placeholder="Correo Electrónico">
+                                        </div>
+                                        <div class="row alert-danger my-2 mx-2 pt-1 text-center" name='Mensaje_error' id="containerError_Mensaje" style="display: none;">
+                                          <label id="error_Mensaje"></label>
+                                        </div>
+                                        <div class="row mb-3 mt-2">
+                                            <button type="submit" name="submitReset" class="btn btn-block font-weight-bold bg-Cprimary text-white"><span class="spinner-border spinner-border-sm text-white d-none" role="status" aria-hidden="true"></span>Solicitar Código</button>
+                                        </div>	
+                                    </div>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" name="Paso2">
+                                <form class="row justify-content-center js-form_Verify">
+                                    <div class="col-11">
+                                        <div class="row justify-content-center">
+                                              <div class="col-12">	
+                                                  <div class="row justify-content-center">
+                                                      <div class="col-12 mt-5 pb-5 h5 font-weight-bold text-center">
+                                                        VERIFICA QUE ERES TÚ
+                                                      </div>
+                                                  </div>				      				
+                                              </div>
+                                          </div>	   
+                                          <div class="row">
+                                              <div class="col-12">
+                                                <div class="row pb-md-3">
+                                                    <input type="text" name="codeVerify" class="form-control text-center" placeholder="X X X X X X ">
+                                                </div>
+                                                <div class="row alert-danger my-2 mx-2 pt-1 text-center" name='Mensaje_error' id="containerError_Mensaje" style="display: none;">
+                                                  <label id="error_Mensaje"></label>
+                                                </div>
+                                              </div>
+                                          </div>	 	
+                                        <div class="row mx-0 mt-5">
+                                            <button type="button" class="btn btn-block">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-12 h8 text-center ">
+                                                        <u class="js-btnPassOne text-Csecondary">No recibí un código de verificación.</u>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>  
+                                        <div class="row mt-1">
+                                            <button type="submit" name="submitVerify" class="btn btn-block bg-Cprimary text-white font-weight-bold"><span class="spinner-border spinner-border-sm text-white d-none" role="status" aria-hidden="true"></span>Verificar</button>
+                                        </div>		 
+                                    </div>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" name="Paso3">
+                                <form class="row justify-content-center js-form_Confirm">
+                                    <div class="col-11">
+                                        <div class="row pt-md-3 h8 justify-content-center text-center">
+                                            <h5>Introduzca su nueva contraseña</h5>
+                                        </div>
+                                        <div class="row pt-md-2">
+                                            <div class="input-group">
+                                              <input type="password" name="new_password1Confirm" class="form-control" placeholder="Contraseña Nueva">
+                                              <div class="input-group-prepend">
+                                                <span class="text-Csecondary input-group-text bg-white border-left-0">
+                                                  <i class="fa js-eye-show fa-eye-slash"></i>
+                                                </span>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-md-3 pb-md-5">
+                                            <div class="input-group">
+                                              <input type="password" name="new_password2Confirm" class="form-control" placeholder="Confirmar Contraseña Nueva">
+                                              <div class="input-group-prepend">
+                                                <span class="text-Csecondary input-group-text bg-white border-left-0">
+                                                  <i class="fa js-eye-show fa-eye-slash"></i>
+                                                </span>
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <button type="submit" name="submitConfirm" class="btn btn-block font-weight-bold bg-Cprimary text-white"><span class="spinner-border spinner-border-sm text-white d-none" role="status" aria-hidden="true"></span>Finalizar</button>
+                                        </div>	
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>	 
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script type="text/javascript" src="{% static 'jquery/jquery.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap4.6/js/bootstrap.bundle.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'general/general.js' %}?{{version_static}}"></script>
+  <script type="text/javascript" src="{% static 'general/config.js' %}?{{version_static}}"></script>
+  <script type="text/javascript" src="{% static 'general/apis.js' %}?{{version_static}}"></script>
+  <script type="text/javascript" src="{% static 'apps/profiles/generalProfile.js' %}?{{version_static}}"></script>
+</body>
+
+</html>

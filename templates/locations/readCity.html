@@ -1,0 +1,36 @@
+{% extends 'general/master.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mx-0 mt-4 mb-2">
+        <div class="col-6 col-md-0 px-0">
+            <h2><b>Ciudades</b></h2>
+        </div>
+    </div>
+    <div class="row mx-0">
+        <div class="col-12 p-0">
+          <div class="table-responsive">
+            <div class="table-wrapper">
+              <div class="row mx-0">
+                <table class="table table-hover">
+                  <thead>
+                    <tr class="bg-Cprimary text-justify text-light shadow">
+                      <th class="align-middle text-center">ID</th>
+                      <th class="align-middle text-center">Nombre</th>     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for city in cities %}
+                    <tr class="table-light text-justify">
+                        <td class="align-middle text-center">{{city.id}}</td>
+                        <td class="align-middle text-center">{{city.name}}</td>
+                    </tr>                            
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}
